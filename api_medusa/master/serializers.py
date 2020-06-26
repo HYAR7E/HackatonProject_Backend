@@ -31,6 +31,16 @@ class CollaboratorSz(serializers.ModelSerializer):
         model = Collaborator
         fields = '__all__'
 
+    def create(self, data):
+        """ Prevent duplicity """
+        collaborator = Collaborator.objects.filter(user=data['user'])
+
+        if len(collaborator) == 0:
+            collaborator = [Collaborator.objects.create(**data)]
+
+        # Finally
+        return collaborator[0]
+
 
 class TagXCollaboratorSz(serializers.ModelSerializer):
     class Meta:

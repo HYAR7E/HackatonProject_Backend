@@ -17,9 +17,10 @@ class Tag(models.Model):
 
 
 class User(models.Model):
-    nickname = models.CharField(max_length=255)
+    nickname = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     escuela = models.ForeignKey(Escuela, on_delete=models.CASCADE)
+    logged = models.BooleanField(default=False)
 
 
 class Collaborator(models.Model):

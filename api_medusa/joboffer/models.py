@@ -33,6 +33,7 @@ class Chat(models.Model):
 
 
 class Message(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
